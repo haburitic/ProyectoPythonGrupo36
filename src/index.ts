@@ -1,9 +1,10 @@
-import {ApplicationConfig, Proyectoclase36Application} from './application';
+import {ApplicationConfig} from '@loopback/core';
+import {Application} from './application';
 
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
-  const app = new Proyectoclase36Application(options);
+  const app = new Application(options);
   await app.boot();
   await app.start();
 

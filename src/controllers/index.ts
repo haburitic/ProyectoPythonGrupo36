@@ -3,5 +3,4 @@ export * from './ping.controller';
 export * from './prueba.controller';
 export * from './user.controller';
 export * from './ventas.controller';
-
-
+export * from './user-user-credentials.controller';
