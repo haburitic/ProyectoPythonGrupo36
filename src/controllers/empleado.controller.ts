@@ -1,5 +1,6 @@
 // ---------- ADD IMPORTS -------------
 import {authenticate} from '@loopback/authentication';
+import {authorize} from '@loopback/authorization';
 import {
   Count,
   CountSchema,
@@ -13,6 +14,7 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
+import {basicAuthorization} from '../middlewares/auth.midd';
 import {Empleado} from '../models';
 import {EmpleadoRepository} from '../repositories';
 
@@ -25,6 +27,11 @@ export class EmpleadoController {
   ) { }
 
   @post('/empleados')
+  @authenticate('jwt')
+  @authorize({
+    allowedRoles: ['user'],
+    voters: [basicAuthorization],
+  })
   @response(200, {
     description: 'Empleado model instance',
     content: {'application/json': {schema: getModelSchemaRef(Empleado)}},
